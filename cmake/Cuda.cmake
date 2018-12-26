@@ -4,7 +4,7 @@ endif()
 
 # Known NVIDIA GPU achitectures Caffe can be compiled for.
 # This list will be used for CUDA_ARCH_NAME = All option
-set(Caffe_known_gpu_archs "20 21(20) 30 35 50")
+set(Caffe_known_gpu_archs "62")
 
 ################################################################################################
 # A function for automatic detection of GPUs installed  (if autodetection is enabled)
@@ -76,7 +76,7 @@ function(caffe_select_nvcc_arch_flags out_variable)
 
   if(${CUDA_ARCH_NAME} STREQUAL "Manual")
     set(CUDA_ARCH_BIN ${Caffe_known_gpu_archs} CACHE STRING "Specify 'real' GPU architectures to build binaries for, BIN(PTX) format is supported")
-    set(CUDA_ARCH_PTX "50"                     CACHE STRING "Specify 'virtual' PTX architectures to build PTX intermediate code for")
+    set(CUDA_ARCH_PTX "62"                     CACHE STRING "Specify 'virtual' PTX architectures to build PTX intermediate code for")
     mark_as_advanced(CUDA_ARCH_BIN CUDA_ARCH_PTX)
   else()
     unset(CUDA_ARCH_BIN CACHE)
@@ -84,11 +84,11 @@ function(caffe_select_nvcc_arch_flags out_variable)
   endif()
 
   if(${CUDA_ARCH_NAME} STREQUAL "Fermi")
-    set(__cuda_arch_bin "20 21(20)")
+    set(__cuda_arch_bin "62")
   elseif(${CUDA_ARCH_NAME} STREQUAL "Kepler")
-    set(__cuda_arch_bin "30 35")
+    set(__cuda_arch_bin "62")
   elseif(${CUDA_ARCH_NAME} STREQUAL "Maxwell")
-    set(__cuda_arch_bin "50")
+    set(__cuda_arch_bin "62")
   elseif(${CUDA_ARCH_NAME} STREQUAL "All")
     set(__cuda_arch_bin ${Caffe_known_gpu_archs})
   elseif(${CUDA_ARCH_NAME} STREQUAL "Auto")
